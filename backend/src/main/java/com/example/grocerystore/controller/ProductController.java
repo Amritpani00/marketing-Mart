@@ -1,5 +1,6 @@
 package com.example.grocerystore.controller;
 
+// This controller handles product-related operations.
 import com.example.grocerystore.model.Product;
 import com.example.grocerystore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
