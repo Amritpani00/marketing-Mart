@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const OrderTracking = () => {
-    const [orders, setOrders] = useState([
+    const [orders] = useState([
         { id: 1, status: 'Shipped', items: ['Apples', 'Milk'] },
         { id: 2, status: 'Processing', items: ['Bread'] },
     ]);
