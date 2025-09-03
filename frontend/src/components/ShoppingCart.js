@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 const ShoppingCart = () => {
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Apples', price: 1.99, quantity: 2 },
-        { id: 2, name: 'Milk', price: 3.49, quantity: 1 },
-    ]);
+    const { cartItems } = useContext(CartContext);
 
     const getTotal = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
