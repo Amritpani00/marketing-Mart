@@ -32,7 +32,7 @@ const SeasonalProductList = () => {
     const { addToCart } = useContext(CartContext);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error] = useState(null);
 
     useEffect(() => {
         // In the future, this would be an API call:
@@ -43,7 +43,7 @@ const SeasonalProductList = () => {
         //         setLoading(false);
         //     })
         //     .catch(error => {
-        //         setError(error);
+        //         // setError(error);
         //         setLoading(false);
         //     });
 
