@@ -24,7 +24,7 @@ function App() {
                             <>
                                 <Link to="/checkout">Checkout</Link>
                                 <Link to="/orders">My Orders</Link>
-                                <a href="/login" onClick={logout}>Logout</a>
+                                <button onClick={logout} className="logout-button">Logout</button>
                             </>
                         ) : (
                             <>
