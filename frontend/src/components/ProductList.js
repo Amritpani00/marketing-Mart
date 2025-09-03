@@ -6,24 +6,28 @@ const ProductList = () => {
     const { addToCart } = useContext(CartContext);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [page, setPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        fetch('/api/products')
-            .then(response => {
+        const fetchProducts = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`/api/products?page=${page}&size=9`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then(data => {
-                setProducts(data);
-                setLoading(false);
-            })
-            .catch(error => {
+                const data = await response.json();
+                setProducts(data.content);
+                setTotalPages(data.totalPages);
+            } catch (error) {
                 setError(error);
-                setLoading(false);
-            });
-    }, []);
+            }
+            setLoading(false);
+        };
+
+        fetchProducts();
+    }, [page]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -41,6 +45,15 @@ const ProductList = () => {
                         <button onClick={() => addToCart(product)}>Add to Cart</button>
                     </div>
                 ))}
+            </div>
+            <div className="pagination-controls">
+                <button onClick={() => setPage(page - 1)} disabled={page === 0}>
+                    Previous
+                </button>
+                <span>Page {page + 1} of {totalPages}</span>
+                <button onClick={() => setPage(page + 1)} disabled={page + 1 >= totalPages}>
+                    Next
+                </button>
             </div>
         </div>
     );

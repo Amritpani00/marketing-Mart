@@ -55,3 +55,13 @@
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.error-message {
+    color: red;
+    background-color: #fdd;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
