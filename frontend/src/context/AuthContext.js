@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     const login = (username, password) => {
         return AuthService.login(username, password).then(
             data => {
+                console.log('User data from login:', data);
                 setCurrentUser(data);
                 return Promise.resolve(data);
             },

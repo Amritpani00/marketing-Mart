@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import ShoppingCart from './components/ShoppingCart';
+import Home from './components/Home';
 import CheckoutForm from './components/CheckoutForm';
 import OrderTracking from './components/OrderTracking';
 import Login from './components/Login';
@@ -12,6 +11,10 @@ import './App.css';
 
 function App() {
     const { currentUser, logout } = useContext(AuthContext);
+
+    useEffect(() => {
+        console.log('Current user in App.js:', currentUser);
+    }, [currentUser]);
 
     return (
         <Router>
@@ -36,16 +39,7 @@ function App() {
                 </header>
                 <main>
                     <Routes>
-                        <Route path="/" element={
-                            <div className="main-content">
-                                <div className="products-container">
-                                    <ProductList />
-                                </div>
-                                <div className="cart-container">
-                                    <ShoppingCart />
-                                </div>
-                            </div>
-                        } />
+                        <Route path="/" element={<Home />} />
                         <Route path="/checkout" element={<ProtectedRoute><CheckoutForm /></ProtectedRoute>} />
                         <Route path="/orders" element={<ProtectedRoute><OrderTracking /></ProtectedRoute>} />
                         <Route path="/login" element={<Login />} />
