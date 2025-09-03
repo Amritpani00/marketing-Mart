@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import ProductList from './ProductList';
 import ShoppingCart from './ShoppingCart';
+import SeasonalProductList from './SeasonalProductList';
 
 const Home = () => {
     return (
@@ -15,6 +16,8 @@ const Home = () => {
                     <ShoppingCart />
                 </div>
             </div>
+            <hr />
+            <SeasonalProductList />
         </div>
     );
 };
