@@ -6,23 +6,30 @@ import '../styles/Auth.css';
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError('');
         try {
             await login(username, password);
             navigate('/');
-        } catch (error) {
-            console.error('Login failed:', error);
+        } catch (err) {
+            setError('Failed to log in. Please check your credentials.');
+            console.error('Login failed:', err);
         }
+        setLoading(false);
     };
 
     return (
         <div className="auth-container">
             <form className="auth-form" onSubmit={handleLogin}>
                 <h2>Login</h2>
+                {error && <p className="error-message">{error}</p>}
                 <div className="form-group">
                     <label>Username</label>
                     <input
@@ -43,7 +50,9 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                </button>
             </form>
         </div>
     );
