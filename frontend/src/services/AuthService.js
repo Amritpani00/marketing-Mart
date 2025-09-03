@@ -1,49 +1,35 @@
-const API_URL = '/api/users/';
+// --- MOCKED API for Frontend-Only Demo Mode ---
 
 const register = (username, email, password) => {
-    return fetch(API_URL + 'register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username,
-            email,
-            password,
-        }),
-    });
+    console.log("DEMO MODE: Mock Register call with:", { username, email, password });
+    // Simulate a successful registration immediately
+    return Promise.resolve();
 };
 
 const login = (username, password) => {
-    return fetch(API_URL + 'login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username,
-            password,
-        }),
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json().then(data => {
-                if (data.token) {
-                    localStorage.setItem('user', JSON.stringify(data));
-                }
-                return data;
-            });
-        } else {
-            return Promise.reject('Login failed');
-        }
-    });
+    console.log("DEMO MODE: Mock Login call with:", { username, password });
+    // Simulate a successful login for any user
+    if (username && password) {
+        const mockUser = {
+            token: 'fake-jwt-token-for-demo-mode',
+            username: username,
+        };
+        // Store the fake user session in local storage, just like the real service would
+        localStorage.setItem('user', JSON.stringify(mockUser));
+        return Promise.resolve(mockUser);
+    } else {
+        // Simulate a login failure
+        return Promise.reject('Login failed: In demo mode, username and password are required.');
+    }
 };
 
 const logout = () => {
+    // The logout function is the same, it just clears local storage
     localStorage.removeItem('user');
 };
 
 const getCurrentUser = () => {
+    // This function is also the same
     return JSON.parse(localStorage.getItem('user'));
 };
 
