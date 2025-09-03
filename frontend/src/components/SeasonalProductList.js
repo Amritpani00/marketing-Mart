@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 const mockSeasonalProducts = [
     {
@@ -28,6 +29,7 @@ const mockSeasonalProducts = [
 ];
 
 const SeasonalProductList = () => {
+    const { addToCart } = useContext(CartContext);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -63,7 +65,7 @@ const SeasonalProductList = () => {
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <p>${product.price}</p>
-                        <button>Add to Cart</button>
+                        <button onClick={() => addToCart(product)}>Add to Cart</button>
                     </div>
                 ))}
             </div>
